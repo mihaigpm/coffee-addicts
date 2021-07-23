@@ -18,23 +18,20 @@ class CoffeeShopsCSVParser {
         print(parsedCSV)
         
         if parsedCSV.count == 0 {
-            // CSV file empty or invalid
-            print("log csv file empty or invalid")
             completion([], .CSVFileInvalid)
         }
         
         for line in parsedCSV {
-            if let lat = Double(line[1]), let lng = Double(line[2]) {
+            if let lat = Double(line[1].trimmingCharacters(in: .newlines)), let lng = Double(line[2].trimmingCharacters(in: .newlines)) {
                 let coffeeShop: CoffeeShop = CoffeeShop(name: line[0], coords: CLLocation(latitude: lat, longitude: lng))
                 coffeeShops.append(coffeeShop)
             } else {
-                print("log line invalid, ignoring")
+                // Ignoring invalid line
                 continue
             }
         }
         
         if coffeeShops.count == 0 {
-            print("log csv file empty or invalid")
             completion([], .CSVFileEmptyResult)
         }
         
