@@ -18,4 +18,8 @@ class CoffeeShopsLocationHelper {
     static func distanceBetweenCoordinates(x: CLLocation, y: CLLocation) -> Double {
         return x.distance(from: y).inKilometers().rounded(toPlaces: 4)
     }
+    
+    static func locationIsValid(location: CLLocation) -> Bool {
+        return (location.coordinate.latitude > -90 && location.coordinate.latitude < 90) && (location.coordinate.longitude > -180 && location.coordinate.longitude < 180)
+    }
 }

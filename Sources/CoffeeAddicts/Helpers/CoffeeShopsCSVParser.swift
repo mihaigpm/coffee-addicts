@@ -23,8 +23,12 @@ class CoffeeShopsCSVParser {
         
         for line in parsedCSV {
             if let lat = Double(line[1].trimmingCharacters(in: .newlines)), let lng = Double(line[2].trimmingCharacters(in: .newlines)) {
-                let coffeeShop: CoffeeShop = CoffeeShop(name: line[0], coords: CLLocation(latitude: lat, longitude: lng))
-                coffeeShops.append(coffeeShop)
+                if CoffeeShopsLocationHelper.locationIsValid(location: CLLocation(latitude: lat, longitude: lng)) {
+                    let coffeeShop: CoffeeShop = CoffeeShop(name: line[0], coords: CLLocation(latitude: lat, longitude: lng))
+                    coffeeShops.append(coffeeShop)
+                } else {
+                    continue
+                }
             } else {
                 // Ignoring invalid line
                 continue
