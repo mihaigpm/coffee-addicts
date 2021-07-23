@@ -9,7 +9,7 @@ import Foundation
 
 typealias CSVResult = (String?, ParsingStatus) -> Void
 
-class Downloader {
+class CoffeeShopsCSVDownloader {
     static func downloadCSVFileFromURLString(_ urlString: String, completion: @escaping CSVResult) {
         let sema = DispatchSemaphore(value: 0)
 
@@ -39,7 +39,7 @@ class Downloader {
                 }
                 
                 if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                    let fileURL = dir.appendingPathComponent("coffee-shops.csv")
+                    let fileURL = dir.appendingPathComponent(Constants.localCSVFileName)
                     
                     do {
                         let csvString = try String(contentsOf: fileURL, encoding: .utf8)

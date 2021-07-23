@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-class LocationHelper {
+class CoffeeShopsLocationHelper {
     static func closestLocation(locations: [CoffeeShop], closestToLocation location: CLLocation) -> [CoffeeShop] {
         let closestLocation = locations.sorted(by: { location.distance(from: $0.coords) < location.distance(from: $1.coords) })
         

@@ -10,7 +10,7 @@ extension Command {
         abstract: "A program to perform simple computations",
         version: "0.0.1",
         subcommands: [
-            Command.ShopsFinder.self]
+            Command.CoffeeShopsFinder.self]
       )
     }
   }

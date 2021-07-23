@@ -10,7 +10,7 @@ import CoreLocation
 
 typealias CoffeeShopsResult = ([CoffeeShop], ParsingStatus) -> Void
 
-class CSVParser {
+class CoffeeShopsCSVParser {
     static func parseCSVString(_ string: String, completion: @escaping CoffeeShopsResult) {
         var coffeeShops: [CoffeeShop] = []
         

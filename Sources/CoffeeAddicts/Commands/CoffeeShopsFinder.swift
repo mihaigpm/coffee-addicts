@@ -9,7 +9,7 @@ import ArgumentParser
 import CoreLocation
 
 extension Command {
-    struct ShopsFinder: ParsableCommand {
+    struct CoffeeShopsFinder: ParsableCommand {
         static var configuration: CommandConfiguration {
           .init(
             commandName: "find-shops",
@@ -27,10 +27,10 @@ extension Command {
         var csvUrl: String
 
         func run() throws {
-            Downloader.downloadCSVFileFromURLString(csvUrl) { csvString, status in
+            CoffeeShopsCSVDownloader.downloadCSVFileFromURLString(csvUrl) { csvString, status in
                 if status == .CSVFileDownloadSuccess {
                     if let string = csvString {
-                        CSVParser.parseCSVString(string) { result, parsingStatus in
+                        CoffeeShopsCSVParser.parseCSVString(string) { result, parsingStatus in
                             if parsingStatus == .CSVFileEmptyResult {
                                 print("Couldn't find any close coffee shops to you :(")
                                 return
@@ -42,11 +42,11 @@ extension Command {
                             }
                             
                             let userLocation = CLLocation(latitude: xCoord, longitude: yCoord)
-                            let coffeeShops = LocationHelper.closestLocation(locations: result, closestToLocation: userLocation)
+                            let coffeeShops = CoffeeShopsLocationHelper.closestLocation(locations: result, closestToLocation: userLocation)
                             
                             print("The closest coffee shops to you are:")
                             for shop in coffeeShops.prefix(3) {
-                                print("\(shop.description) - \(LocationHelper.distanceBetweenCoordinates(x: shop.coords, y: userLocation)) km")
+                                print("\(shop.description) - \(CoffeeShopsLocationHelper.distanceBetweenCoordinates(x: shop.coords, y: userLocation)) km")
                             }
                         }
                     }
