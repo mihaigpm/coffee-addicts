@@ -17,6 +17,8 @@ $ chmod +x install.sh
 $ ./install.sh
 ```
 
+> **Note:** On MacOS, if you get a command line tools missing error, run the following command: `xcode-select --install`
+
 ## How to Run
 
 ```
