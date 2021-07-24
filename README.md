@@ -22,12 +22,12 @@ $ ./install.sh
 ## How to Run
 
 ```
-$ coffeeaddicts find-shops YOUR_LATITUDE YOUR_LONGITUDE COFFEE_SHOPS_CSV_URL
+$ coffeeaddicts find-shops -- YOUR_LATITUDE YOUR_LONGITUDE COFFEE_SHOPS_CSV_URL
 ```
 Example:
 
 ```
-$ coffeeaddicts find-shops 42.2115 23.2236 https://raw.githubusercontent.com/Agilefreaks/test_oop/master/coffee_shops.csv
+$ coffeeaddicts find-shops -- 42.2115 23.2236 https://raw.githubusercontent.com/Agilefreaks/test_oop/master/coffee_shops.csv
 ```
 `YOUR_LATITUDE` and `YOUR_LONGITUDE` must be provided in decimal format.
 `COFFEE_SHOPS_CSV_URL` must be a valid URL containing a CSV formatted file to download, with the following strcuture:
