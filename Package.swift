@@ -6,7 +6,8 @@ import PackageDescription
 let package = Package(
     name: "CoffeeAddicts",
     products: [
-            .executable(name: "coffeeaddicts", targets: ["CoffeeAddicts"])
+            .executable(name: "CoffeeAddicts", targets: ["CoffeeAddicts"]),
+            .library(name: "CoffeeAddictsLibrary", targets: ["CoffeeAddictsLibrary"]),
         ],
     dependencies: [
         .package(
@@ -21,10 +22,15 @@ let package = Package(
         .target(
             name: "CoffeeAddicts",
             dependencies: [
+                "CoffeeAddictsLibrary"
+            ]),
+        .target(
+            name: "CoffeeAddictsLibrary",
+            dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
             ]),
         .testTarget(
             name: "CoffeeAddictsTests",
-            dependencies: ["CoffeeAddicts"]),
+            dependencies: ["CoffeeAddictsLibrary"]),
     ]
 )

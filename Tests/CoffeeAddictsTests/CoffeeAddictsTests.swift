@@ -1,17 +1,17 @@
 import XCTest
 import class Foundation.Bundle
-//@testable import coffeeaddicts
+@testable import CoffeeAddictsLibrary
 
 final class CoffeeAddictsTests: XCTestCase {
-//    func testValidClosestLocationToUserLocation() {
-//        let userLocation = CLLocation(latitude: 42.21, longitude: 22.21)
-//        let coffeeShop = CoffeeShop(name: "Mock Coffee Shop", coords: userLocation)
-//
-//        let closestLocation = CoffeeShopsLocationHelper.closestLocation(locations: [coffeeShop], closestToLocation: userLocation)
-//
-//        XCTAssert(closestLocation.count == 1)
-//    }
-//
+    func testValidClosestLocationToUserLocation() {
+        let userLocation = CLLocation(latitude: 42.21, longitude: 22.21)
+        let coffeeShop = CoffeeShop(name: "Mock Coffee Shop", coords: userLocation)
+
+        let closestLocation = CoffeeShopsLocationHelper.closestLocation(locations: [coffeeShop], closestToLocation: userLocation)
+
+        XCTAssert(closestLocation.count == 1)
+    }
+
 //    func testInvalidClosestLocationToUserLocation() {
 //        let userLocation = CLLocation(latitude: -5, longitude: 0)
 //        let coffeeShop = CoffeeShop(name: "Mock Coffee Shop", coords: CLLocation(latitude: 42.2, longitude: 22.1))

@@ -1,6 +1,5 @@
 import ArgumentParser
-
-enum Command {}
+import CoffeeAddictsLibrary
 
 extension Command {
   struct Main: ParsableCommand {

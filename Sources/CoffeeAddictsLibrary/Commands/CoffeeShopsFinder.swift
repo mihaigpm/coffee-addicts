@@ -8,14 +8,15 @@
 import ArgumentParser
 import CoreLocation
 
+public enum Command {}
+
 extension Command {
-    struct CoffeeShopsFinder: ParsableCommand {
-        static var configuration: CommandConfiguration {
-          .init(
+    public struct CoffeeShopsFinder: ParsableCommand {
+        public init() {}
+        public static var configuration = CommandConfiguration(
             commandName: "find-shops",
             abstract: "Returns a list of the three closest coffee shops"
-          )
-        }
+        )
 
         @Argument(help: "Your X Coordinate")
         var xCoord: Double
@@ -26,7 +27,7 @@ extension Command {
         @Argument(help: "Coffee Shops CSV file URL")
         var csvUrl: String
 
-        func run() throws {
+        public func run() throws {
             CoffeeShopsCSVDownloader.downloadCSVFileFromURLString(csvUrl) { csvString, status in
                 if status == .CSVFileDownloadSuccess {
                     if let string = csvString {
