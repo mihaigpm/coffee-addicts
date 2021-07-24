@@ -22,7 +22,7 @@ $ ./install.sh
 ## How to Run
 
 ```
-$ coffeeaddicts YOUR_LATITUDE YOUR_LONGITUDE COFFEE_SHOPS_CSV_URL
+$ coffeeaddicts find-shops YOUR_LATITUDE YOUR_LONGITUDE COFFEE_SHOPS_CSV_URL
 ```
 Example:
 
