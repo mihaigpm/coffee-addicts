@@ -45,9 +45,11 @@ extension Command {
                             let userLocation = CLLocation(latitude: xCoord, longitude: yCoord)
                             let coffeeShops = CoffeeShopsLocationHelper.closestLocation(locations: result, closestToLocation: userLocation)
                             
-                            print("The closest coffee shops to you are:")
-                            for shop in coffeeShops.prefix(3) {
-                                print("\(shop.description) - \(CoffeeShopsLocationHelper.distanceBetweenCoordinates(x: shop.coords, y: userLocation)) km")
+                            if coffeeShops.count >= 3 {
+                                print("The closest coffee shops to you are:")
+                                for shop in coffeeShops.prefix(3) {
+                                    print("\(shop.description) - \(CoffeeShopsLocationHelper.distanceBetweenCoordinates(x: shop.coords, y: userLocation)) km")
+                                }
                             }
                         }
                     }

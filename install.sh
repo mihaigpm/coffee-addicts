@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 swift build -c release
-install .build/release/coffeeaddicts /usr/local/bin/coffeeaddicts
+install .build/release/CoffeeAddicts /usr/local/bin/CoffeeAddicts

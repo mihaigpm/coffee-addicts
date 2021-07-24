@@ -31,6 +31,9 @@ let package = Package(
             ]),
         .testTarget(
             name: "CoffeeAddictsTests",
-            dependencies: ["CoffeeAddictsLibrary"]),
+            dependencies: ["CoffeeAddictsLibrary"],
+            resources: [
+                .copy("Resources")
+            ]),
     ]
 )

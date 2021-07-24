@@ -15,13 +15,15 @@ class CoffeeShopsCSVParser {
         var coffeeShops: [CoffeeShop] = []
         
         let parsedCSV: [[String]] = string.components(separatedBy: "\n").map{ $0.components(separatedBy: ",") }
-        print(parsedCSV)
         
         if parsedCSV.count == 0 {
             completion([], .CSVFileInvalid)
         }
         
         for line in parsedCSV {
+            if line.count != 3 {
+                continue
+            }
             if let lat = Double(line[1].trimmingCharacters(in: .newlines)), let lng = Double(line[2].trimmingCharacters(in: .newlines)) {
                 if CoffeeShopsLocationHelper.locationIsValid(location: CLLocation(latitude: lat, longitude: lng)) {
                     let coffeeShop: CoffeeShop = CoffeeShop(name: line[0], coords: CLLocation(latitude: lat, longitude: lng))

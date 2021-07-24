@@ -20,12 +20,12 @@ $ ./install.sh
 ## How to Run
 
 ```
-$ coffeeaddicts YOUR_LATITUDE YOUR_LONGITUDE COFFEE_CSV_URL
+$ CoffeeAddicts YOUR_LATITUDE YOUR_LONGITUDE COFFEE_CSV_URL
 ```
 Example:
 
 ```
-$ coffeeaddicts 42.2115 23.2236 https://raw.githubusercontent.com/Agilefreaks/test_oop/master/coffee_shops.csv
+$ CoffeeAddicts 42.2115 23.2236 https://raw.githubusercontent.com/Agilefreaks/test_oop/master/coffee_shops.csv
 ```
 `YOUR_LATITUDE` and `YOUR_LONGITUDE` must be provided in decimal format.
 `COFFEE_CSV_URL` must be a valid URL containing a CSV formatted file to download.
@@ -41,11 +41,11 @@ Starbucks Seattle - (47.5809, -122.316) - 9039.7816 km
 
 ### Troubleshooting
 
-Run `coffeeaddicts -h` for more help.
+Run `CoffeeAddicts -h` for more help.
 
 ```
 OVERVIEW: A program to perform simple computations
-USAGE: coffeeaddicts <subcommand>
+USAGE: CoffeeAddicts <subcommand>
 
 OPTIONS:
 --version Show the version.
@@ -54,5 +54,5 @@ OPTIONS:
 SUBCOMMANDS:
 find-shops  Returns a list of the three closest coffee shops
 
-See 'coffeeaddicts help <subcommand>' for detailed help.
+See 'CoffeeAddicts help <subcommand>' for detailed help.
 ```
