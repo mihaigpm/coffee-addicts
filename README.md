@@ -33,6 +33,14 @@ $ coffeeaddicts find-shops -- 42.2115 23.2236 https://raw.githubusercontent.com/
 `COFFEE_SHOPS_CSV_URL` must be a valid URL containing a CSV formatted file to download, with the following strcuture:
 `<shop-name>,<x-coord>,<y-coord>`
 
+## How to Test
+
+In the project folder, run:
+
+```
+$ swift test
+```
+
 ### Sample Output
 
 ```
