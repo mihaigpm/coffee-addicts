@@ -9,4 +9,5 @@ import Foundation
 
 struct Constants {
     static let localCSVFileName = "coffee-shops.csv"
+    static let numberOfShopsToReturn = 3
 }

@@ -12,19 +12,30 @@ typealias CoffeeShopsResult = ([CoffeeShop], ParsingStatus) -> Void
 
 class CoffeeShopsCSVParser {
     static func parseCSVString(_ string: String, completion: @escaping CoffeeShopsResult) {
-        var coffeeShops: [CoffeeShop] = []
-        
         let parsedCSV: [[String]] = string.components(separatedBy: "\n").map{ $0.components(separatedBy: ",") }
         
-        if parsedCSV.count == 0 {
+        guard parsedCSV.count > 0 else {
             completion([], .CSVFileInvalid)
+            return
         }
+        
+        let coffeeShops = CoffeeShopsCSVParser.coffeeShopsFromParsedCSV(parsedCSV)
+        if coffeeShops.count == 0 {
+            completion([], .CSVFileEmptyResult)
+        }
+        
+        completion(coffeeShops, .CSVParsingSuccess)
+    }
+    
+    static func coffeeShopsFromParsedCSV(_ parsedCSV: [[String]]) -> [CoffeeShop] {
+        var coffeeShops: [CoffeeShop] = []
         
         for line in parsedCSV {
             if line.count != 3 {
                 continue
             }
-            if let lat = Double(line[1].trimmingCharacters(in: .newlines)), let lng = Double(line[2].trimmingCharacters(in: .newlines)) {
+            if let lat = CoffeeShopsCSVParser.sanitizedCoordinateFromString(line[1]),
+               let lng = CoffeeShopsCSVParser.sanitizedCoordinateFromString(line[2]) {
                 if CoffeeShopsLocationHelper.locationIsValid(location: CLLocation(latitude: lat, longitude: lng)) {
                     let coffeeShop: CoffeeShop = CoffeeShop(name: line[0], coords: CLLocation(latitude: lat, longitude: lng))
                     coffeeShops.append(coffeeShop)
@@ -37,12 +48,11 @@ class CoffeeShopsCSVParser {
             }
         }
         
-        if coffeeShops.count == 0 {
-            completion([], .CSVFileEmptyResult)
-        }
-        
-        completion(coffeeShops, .CSVParsingSuccess)
+        return coffeeShops
     }
     
-    
+    static func sanitizedCoordinateFromString(_ coord: String) -> Double? {
+        return Double(coord.trimmingCharacters(in: .newlines))
+        
+    }
 }

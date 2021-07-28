@@ -29,32 +29,37 @@ extension Command {
 
         public func run() throws {
             CoffeeShopsCSVDownloader.downloadCSVFileFromURLString(csvUrl) { csvString, status in
-                if status == .CSVFileDownloadSuccess {
-                    if let string = csvString {
-                        CoffeeShopsCSVParser.parseCSVString(string) { result, parsingStatus in
-                            if parsingStatus == .CSVFileEmptyResult {
-                                print("Couldn't find any close coffee shops to you :(")
-                                return
-                            }
-                            
-                            if parsingStatus != .CSVParsingSuccess {
-                                print("Unable to parse the submitted CSV file. Please provide another one.")
-                                return
-                            }
-                            
-                            let userLocation = CLLocation(latitude: xCoord, longitude: yCoord)
-                            let coffeeShops = CoffeeShopsLocationHelper.closestLocation(locations: result, closestToLocation: userLocation)
-                            
-                            if coffeeShops.count >= 3 {
-                                print("The closest coffee shops to you are:")
-                                for shop in coffeeShops.prefix(3) {
-                                    print("\(shop.description) - \(CoffeeShopsLocationHelper.distanceBetweenCoordinates(x: shop.coords, y: userLocation)) km")
-                                }
-                            }
-                        }
-                    }
-                } else {
+                guard status == .CSVFileDownloadSuccess else {
                     print("Unable to download the CSV file, please try again later.")
+                    return
+                }
+                
+                if let string = csvString {
+                    CoffeeShopsCSVParser.parseCSVString(string) { result, parsingStatus in
+                        if parsingStatus == .CSVFileEmptyResult {
+                            print("Couldn't find any close coffee shops to you :(")
+                            return
+                        }
+                        
+                        if parsingStatus != .CSVParsingSuccess {
+                            print("Unable to parse the submitted CSV file. Please provide another one.")
+                            return
+                        }
+                        
+                        let userLocation = CLLocation(latitude: xCoord, longitude: yCoord)
+                        let coffeeShops = CoffeeShopsLocationHelper.closestLocation(locations: result, closestToLocation: userLocation)
+                        
+                        self.displayShops(coffeeShops, userLocation: userLocation)
+                    }
+                }
+            }
+        }
+        
+        func displayShops(_ coffeeShops: [CoffeeShop], userLocation: CLLocation) {
+            if coffeeShops.count >= Constants.numberOfShopsToReturn {
+                print("The closest coffee shops to you are:")
+                for shop in coffeeShops.prefix(Constants.numberOfShopsToReturn) {
+                    print("\(shop.description) - \(CoffeeShopsLocationHelper.distanceBetweenCoordinates(x: shop.coords, y: userLocation)) km")
                 }
             }
         }

@@ -19,9 +19,6 @@ final class CoffeeAddictsTests: XCTestCase {
     }
     
     func testInvalidCSVFile() {
-//        let bundle = Bundle(for: type(of: self))
-//        let path = bundle.path(forResource: "invalid-csv-shops", ofType: "csv")!
-        
         var shops: [CoffeeShop] = []
         CoffeeShopsCSVParser.parseCSVString("Starbucks Seattle47.5809-122.3160\r") { (result, status) in
             shops = result
