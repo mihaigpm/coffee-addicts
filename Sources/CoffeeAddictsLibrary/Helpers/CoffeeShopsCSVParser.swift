@@ -10,6 +10,16 @@ import CoreLocation
 
 typealias CoffeeShopsResult = ([CoffeeShop], ParsingStatus) -> Void
 
+enum ParsingStatus: String {
+    case CSVFileDownloadError
+    case CSVFileReadingError
+    case CSVFileDownloadSuccess
+    case CSVFileInvalid
+    case CSVFileLineInvalid
+    case CSVFileEmptyResult
+    case CSVParsingSuccess
+}
+
 class CoffeeShopsCSVParser {
     static func parseCSVString(_ string: String, completion: @escaping CoffeeShopsResult) {
         let parsedCSV: [[String]] = string.components(separatedBy: "\n").map{ $0.components(separatedBy: ",") }
@@ -29,9 +39,10 @@ class CoffeeShopsCSVParser {
     
     static func coffeeShopsFromParsedCSV(_ parsedCSV: [[String]]) -> [CoffeeShop] {
         var coffeeShops: [CoffeeShop] = []
+        let expectedNumberOfLineParameters = 3
         
         for line in parsedCSV {
-            if line.count != 3 {
+            if line.count != expectedNumberOfLineParameters {
                 continue
             }
             if let lat = CoffeeShopsCSVParser.sanitizedCoordinateFromString(line[1]),
